@@ -1,0 +1,20 @@
+Lệnh xóa cache cũ: cmdkey /delete:git:https://github.com
+
+
+Đăng nhập vào GitHub
+user: tanvndps27768@fpt.edu.vn
+password: DuyTan@0502
+
+Lệnh git clone dự án
+git clone https://github.com/dumamay2004/benhvien
+
+Lệnh git chọn tài khoản up, clone dự án
+git config --global user.name "dumamay2004"
+git config --global user.email tanvndps27768@fpt.edu.vn
+git config --list
+
+Lệnh git up dự án
+git init
+git add .
+git commit m"quanlybenhvien"
+git push origin master

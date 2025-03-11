@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chỉnh sửa thông tin bệnh nhân</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+  /* Reset cơ bản */
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+}
+
+/* Container chính */
+.container {
+    max-width: 900px;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+}
+
+/* Tiêu đề */
+h2 {
+    font-weight: bold;
+    color: #007bff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Form */
+form .form-label {
+    font-weight: bold;
+    color: #333;
+}
+
+form .form-control {
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ced4da;
+}
+
+form .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Nút */
+.btn {
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border: none;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Avatar & Thông tin bệnh nhân */
+.card {
+    text-align: center;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+    width: 120px;
+    border-radius: 50%;
+    border: 4px solid #007bff;
+}
+
+.card h4 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.card p {
+    color: gray;
+    font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+
+  </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <img src="https://via.placeholder.com/150" alt="Avatar" class="rounded-circle img-fluid mb-3">
+                        <h4 th:text="${benhnhan.hoTen}">John Doe</h4>
+                        <p class="text-muted">Bệnh nhân</p>
+                        <p class="text-muted" th:text="${benhnhan.tinhTp} + ', ' + ${benhnhan.quanHuyen}">Hà Nội, Việt Nam</p>
+                        <button class="btn btn-primary">Follow</button>
+                        <button class="btn btn-outline-secondary">Message</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+    <h2 class="text-center">Chỉnh sửa thông tin bệnh nhân</h2>
+
+    <div th:if="${message}" class="alert alert-success text-center" role="alert">
+        <span th:text="${message}"></span>
+    </div>
+    <div th:if="${error}" class="alert alert-danger text-center" role="alert">
+        <span th:text="${error}"></span>
+    </div>
+
+    <!-- Form cập nhật thông tin bệnh nhân -->
+    <form th:action="@{/benhnhan/update/{id}(id=${benhnhan.maBenhNhan})}" th:object="${benhnhan}" method="post">
+        
+        <div class="mb-3">
+            <label for="hoTen" class="form-label">Họ và tên</label>
+            <input type="text" class="form-control" id="hoTen" th:field="*{hoTen}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="namSinh" class="form-label">Năm sinh</label>
+            <input type="date" class="form-control" id="namSinh" th:field="*{namSinh}" required>
+
+    </div>
+
+
+        <div class="mb-3">
+            <label for="gioiTinh" class="form-label">Giới tính</label>
+            <select class="form-control" id="gioiTinh" th:field="*{gioiTinh}">
+                <option value="Nam">Nam</option>
+                <option value="Nữ">Nữ</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" th:field="*{email}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="sdt" class="form-label">Số điện thoại</label>
+            <input type="text" class="form-control" id="sdt" th:field="*{sdt}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="tinhTp" class="form-label">Tỉnh/Thành phố</label>
+            <input type="text" class="form-control" id="tinhTp" th:field="*{tinhTp}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="quanHuyen" class="form-label">Quận/Huyện</label>
+            <input type="text" class="form-control" id="quanHuyen" th:field="*{quanHuyen}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="duong" class="form-label">Đường</label>
+            <input type="text" class="form-control" id="duong" th:field="*{duong}" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Cập nhật</button>
+        <a th:href="@{/benhnhan}" class="btn btn-secondary">Hủy</a>
+    </form>
+   
+                
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
