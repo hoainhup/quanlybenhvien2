@@ -69,13 +69,4 @@
     
         }
         
-    
-    
-        // @PostMapping("/update/{id}")
-        // public String updateBenhNhan(@PathVariable Integer id,
-        // @ModelAttribute("benhnhan") BenhNhan benhNhan) {
-        // benhNhan.setMaBN(id);
-        // benhNhanService.saveBenhNhan(benhNhan);
-        // return "redirect:/benhnhan";
-        // }
 

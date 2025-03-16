@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.quanlybenhvien.Service.QuanLyService;
 
-@Controller
+@Controller 
 public class AdminController {
     @Autowired
     QuanLyService nguoiDungService;
